@@ -1,8 +1,9 @@
 const flightSearch = document.getElementById("flightSearch")
 const person = document.getElementById("person")
-const depAirportId = document.getElementById("airportId")
+const depAirportId = document.getElementById("depAirportId")
+const arrAirportId = document.getElementById("arrAirportId")
 const depPlandTime = document.getElementById("depPlandTime")
-const arrPlandTime = document.getElementById("arrPlandTime")
+const depPlandTimeToCome = document.getElementById("depPlandTimeToCome")
 const searchForm = document.getElementById("searchForm")
 const accordion = document.getElementById("accordionExample")
 const btn = document.getElementById("pills-flights-tab")
@@ -28,7 +29,7 @@ function getAirportList () {
       }
       opt.value = e.airportId
       opt.innerHTML = e.airportNm
-      airportId.appendChild(opt)
+      depAirportId.appendChild(opt)
 
     }
       
@@ -39,9 +40,26 @@ getAirportList();
 
 flightSearch.addEventListener("click", ()=>{
     
-    searchForm.setAttribute("action", "./list")
-    searchForm.setAttribute("method", "post")
-    searchForm.submit();
+    let params = new FormData();
+    params.append("arrAirportId", arrAirportId.value)
+    params.append("depAirportId", depAirportId.value)
+    params.append("depPlandTime", depPlandTime.value)
+    params.append("depPlandTimeToCome", depPlandTimeToCome.value)
+    params.append("adult", adult.value)
+    params.append("child", child.value)
+    params.append("infant", infant.value)
+
+    fetch("./search", {
+      method: "POST",
+      body: params
+    })
+    .then(r=>r.text())
+    .then(r=>{
+      searchForm.setAttribute("action", "./list")
+      searchForm.setAttribute("method", "post")
+      searchForm.submit();
+    })
+
 
 })
 

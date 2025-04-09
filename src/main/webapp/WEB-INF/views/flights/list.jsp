@@ -18,21 +18,24 @@
 	<div class="container-fluid my-5">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
+			 <div class="row mt-5">
+				 <legend style="font-weight: bolder; font-size: xx-large;">${journey} 선택</legend>
+			 </div>
 			<form id="reForm">
 				<div class="row">
 					<div class="col">
-						<div class="input-group mb-3 mt-5" style="width: 80%;">
+						<div class="input-group mb-3 mt-5" style="width: 80%; <c:if test="${not empty searchInfo.flightNumGo }">display: none;</c:if>" >
 							<label class="input-group-text" for="airportId">출발지</label>
-							<select	class="form-select" id="airportId" name="airportId">
-								<option selected value="${airportId}">출발 공항 선택</option>
+							<select	class="form-select" id="depAirportId" name="depAirportId">
+								<option id="selected" selected value="${depAirportId}">출발 공항 선택</option>
 							</select>
 						</div>
 					</div>
 					<div class="col">
 						<div class="input-group mb-3 mt-5" style="width: 80%;">
-							<label class="input-group-text" for="airlineNm">여행사</label>
+							<label class="input-group-text" for="airlineNm">항공사</label>
 							<select	class="form-select" id="airlineNm" name="airlineNm">
-								<option selected>항공사별 조회</option>
+								<option selected value="">항공사별 조회</option>
 							</select>
 						</div>
 					</div>
@@ -62,6 +65,8 @@
 							<c:if test="${day.a3Day ge day.today }">${day.a3Day }</c:if>
 						</a>
 					</div>
+					<input type="hidden" name="arrAirportId" value="${arrAirportId}">
+					<input type="hidden" name="depPlandTimeToCome" id="depPlandTimeToCome" value="${depPlandTimeToCome}">
 			</form>
 				
 				<div class="">
@@ -78,136 +83,19 @@
 						</div>
 						<div class="tab-pane fade" id="list-2" role="tabpanel">
 							<div id="list2">
-								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
-									<c:forEach items="${list1 }" var="v" varStatus="i">
-										<div class="accordion-item">
-											<h2 class="accordion-header">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
-													<div class="col-2">
-														<div class="row">${v.airlineNm}</div>
-														<div class="row">${v.vihicleId}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.depPlandTime}</div>
-														<div class="row">${v.depAirportNm}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.arrPlandTime}</div>
-														<div class="row">${v.arrAirportNm}</div>
-													</div>
-													<div class="col-1"><i class="bi bi-airplane" style="font-size: 2rem;"></i></div>
-													<div class="col">
-														<div class="row">최저가</div>
-														<div class="row">${v.economyCharge} ~</div>
-													</div>
-												</button>
-											</h2>
-											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-												<div class="accordion-body">
-													<div class="row">
-														<div class="col-2">
-
-														</div>
-														<div class="col-8">
-															<div class="form-check">
-																<hr class="section-spacer">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-																<label class="form-check-label" for="flexRadioDefault1">
-																	<div class="align-self-start">좌석 : 일반석</div>
-																	<div class="align-self-end"> 운임 : ${v.economyCharge}</div>
-																</label>
-
-															</div>
-															<c:if test="${v.prestigeCharge ne '0' }">
-																<div class="form-check">
-																	<hr class="section-spacer">
-																	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		<div class="align-self-start">좌석 : 비즈니스석</div>
-																		<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
-																	</label>
-																</div>
-															</c:if>
-														</div>
-														<div class="col-2 align-self-end">
-															<button type="button" class="btn btn-info">오는 편 선택</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
+								
 							</div>
 						</div>
 						<div class="tab-pane fade" id="list-3" role="tabpanel">
 							<div id="list3">
-								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
-									<c:forEach items="${list1 }" var="v" varStatus="i">
-										<div class="accordion-item">
-											<h2 class="accordion-header">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
-													<div class="col-2">
-														<div class="row">${v.airlineNm}</div>
-														<div class="row">${v.vihicleId}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.depPlandTime}</div>
-														<div class="row">${v.depAirportNm}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.arrPlandTime}</div>
-														<div class="row">${v.arrAirportNm}</div>
-													</div>
-													<div class="col-1"><i class="bi bi-airplane" style="font-size: 2rem;"></i></div>
-													<div class="col">
-														<div class="row">최저가</div>
-														<div class="row">${v.economyCharge} ~</div>
-													</div>
-												</button>
-											</h2>
-											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-												<div class="accordion-body">
-													<div class="row">
-														<div class="col-2">
-
-														</div>
-														<div class="col-8">
-															<div class="form-check">
-																<hr class="section-spacer">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-																<label class="form-check-label" for="flexRadioDefault1">
-																	<div class="align-self-start">좌석 : 일반석</div>
-																	<div class="align-self-end"> 운임 : ${v.economyCharge}</div>
-																</label>
-
-															</div>
-															<c:if test="${v.prestigeCharge ne '0' }">
-																<div class="form-check">
-																	<hr class="section-spacer">
-																	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		<div class="align-self-start">좌석 : 비즈니스석</div>
-																		<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
-																	</label>
-																</div>
-															</c:if>
-														</div>
-														<div class="col-2 align-self-end">
-															<button type="button" class="btn btn-info">오는 편 선택</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
+								
 							</div>
 						</div>
 						<div class="tab-pane fade show active" id="list-4" role="tabpanel">
 							<div id="list4">
 								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
-									<c:forEach items="${list1 }" var="v" varStatus="i">
+									<c:forEach items="${list }" var="v" varStatus="i">
+										<input type="hidden" name="fn" id="fn" value="${v.flightNum}">
 										<div class="accordion-item">
 											<h2 class="accordion-header">
 												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
@@ -239,27 +127,27 @@
 														<div class="col-8">
 															<div class="form-check">
 																<hr class="section-spacer">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-																<label class="form-check-label" for="flexRadioDefault1">
+																<label class="form-check-label" for="flexRadioDefault1" value="${v.economyCharge}">
 																	<div class="align-self-start">좌석 : 일반석</div>
 																	<div class="align-self-end"> 운임 : ${v.economyCharge}</div>
 																</label>
 
+																<c:if test="${v.prestigeCharge ne '0' }">
+																	
+																		<hr class="section-spacer">
+																		<label class="form-check-label" for="flexRadioDefault2" value="${v.prestigeCharge}">
+																			<div class="align-self-start">좌석 : 비즈니스석</div>
+																			<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
+																		</label>
+																	
+																</c:if>
 															</div>
-															<c:if test="${v.prestigeCharge ne '0' }">
-																<div class="form-check">
-																	<hr class="section-spacer">
-																	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		<div class="align-self-start">좌석 : 비즈니스석</div>
-																		<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
-																	</label>
-																</div>
-															</c:if>
 														</div>
+
 														<div class="col-2 align-self-end">
-															<button type="button" class="btn btn-info">오는 편 선택</button>
+															<button type="button" class="btn btn-info choice" id="btn">선택</button>
 														</div>
+
 													</div>
 												</div>
 											</div>
@@ -270,130 +158,12 @@
 						</div>
 						<div class="tab-pane fade" id="list-5" role="tabpanel">
 							<div id="list5">
-								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
-									<c:forEach items="${list1 }" var="v" varStatus="i">
-										<div class="accordion-item">
-											<h2 class="accordion-header">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
-													<div class="col-2">
-														<div class="row">${v.airlineNm}</div>
-														<div class="row">${v.vihicleId}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.depPlandTime}</div>
-														<div class="row">${v.depAirportNm}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.arrPlandTime}</div>
-														<div class="row">${v.arrAirportNm}</div>
-													</div>
-													<div class="col-1"><i class="bi bi-airplane" style="font-size: 2rem;"></i></div>
-													<div class="col">
-														<div class="row">최저가</div>
-														<div class="row">${v.economyCharge} ~</div>
-													</div>
-												</button>
-											</h2>
-											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-												<div class="accordion-body">
-													<div class="row">
-														<div class="col-2">
-
-														</div>
-														<div class="col-8">
-															<div class="form-check">
-																<hr class="section-spacer">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-																<label class="form-check-label" for="flexRadioDefault1">
-																	<div class="align-self-start">좌석 : 일반석</div>
-																	<div class="align-self-end"> 운임 : ${v.economyCharge}</div>
-																</label>
-
-															</div>
-															<c:if test="${v.prestigeCharge ne '0' }">
-																<div class="form-check">
-																	<hr class="section-spacer">
-																	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		<div class="align-self-start">좌석 : 비즈니스석</div>
-																		<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
-																	</label>
-																</div>
-															</c:if>
-														</div>
-														<div class="col-2 align-self-end">
-															<button type="button" class="btn btn-info">오는 편 선택</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
+								
 							</div>			
 						</div>
 						<div class="tab-pane fade" id="list-6" role="tabpanel">
 							<div id="list6">
-								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
-									<c:forEach items="${list1 }" var="v" varStatus="i">
-										<div class="accordion-item">
-											<h2 class="accordion-header">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
-													<div class="col-2">
-														<div class="row">${v.airlineNm}</div>
-														<div class="row">${v.vihicleId}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.depPlandTime}</div>
-														<div class="row">${v.depAirportNm}</div>
-													</div>
-													<div class="col">
-														<div class="row">${v.arrPlandTime}</div>
-														<div class="row">${v.arrAirportNm}</div>
-													</div>
-													<div class="col-1"><i class="bi bi-airplane" style="font-size: 2rem;"></i></div>
-													<div class="col">
-														<div class="row">최저가</div>
-														<div class="row">${v.economyCharge} ~</div>
-													</div>
-												</button>
-											</h2>
-											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-												<div class="accordion-body">
-													<div class="row">
-														<div class="col-2">
-
-														</div>
-														<div class="col-8">
-															<div class="form-check">
-																<hr class="section-spacer">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-																<label class="form-check-label" for="flexRadioDefault1">
-																	<div class="align-self-start">좌석 : 일반석</div>
-																	<div class="align-self-end"> 운임 : ${v.economyCharge}</div>
-																</label>
-
-															</div>
-															<c:if test="${v.prestigeCharge ne '0' }">
-																<div class="form-check">
-																	<hr class="section-spacer">
-																	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		<div class="align-self-start">좌석 : 비즈니스석</div>
-																		<div class="align-self-end"> 운임 : ${v.prestigeCharge}</div>
-																	</label>
-																</div>
-															</c:if>
-														</div>
-														<div class="col-2 align-self-end">
-															<button type="button" class="btn btn-info">오는 편 선택</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
+								
 							</div>
 						</div>
 						<div class="tab-pane fade" id="list-7" role="tabpanel">
