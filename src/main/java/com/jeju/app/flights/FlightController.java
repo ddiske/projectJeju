@@ -30,17 +30,10 @@ public class FlightController {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public void getList(HttpServletRequest request, Model model) throws Exception {
 		
-		flightService.flightsUpdate(request);
-		
 		Days days =  new Days();
 		days.setSearchDay(request.getParameter("depPlandTime"));
 		model.addAttribute("day", days);
-		model.addAttribute("airportId", request.getParameter("airportId"));
-		model.addAttribute("list1", flightService.getList(request).get(0));
-		model.addAttribute("list2", flightService.getList(request).get(1));
-		model.addAttribute("list3", flightService.getList(request).get(2));
-		model.addAttribute("list4", flightService.getList(request).get(3));
-		model.addAttribute("list5", flightService.getList(request).get(4));
+		
 	}
 	
 //	@RequestMapping(value = "updateList", method = RequestMethod.POST)

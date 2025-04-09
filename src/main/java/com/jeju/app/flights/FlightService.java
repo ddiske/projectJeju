@@ -49,32 +49,32 @@ public class FlightService {
 		return flightDAO.getList(map);
 	}
 	
-	public void flightsUpdate(HttpServletRequest request) throws Exception {
-		
-		int result = apisService.deleteAll();
-		
-		System.out.println("delete : "+result);
-		result = 0;
-		
-		ApiItemDTO dto = new ApiItemDTO();
-		dto.setAirportId((String)request.getParameter("airportId"));
-		
-		Days days = new Days();
-		
-		days.setSearchDay(request.getParameter("depPlandTime"));
-		
-		for(int i = 0; i < 7; i++) {
-			
-			Calendar ca = days.stringToCalendar(days.getB3Day().toString());
-			ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
-			
-			Date d = new Date(ca.getTimeInMillis());
-			String date = d.toString().replace("-", "");
-			
-			result = result + apisService.getFlightsList(dto, date);
-			System.out.println("insert : "+result);
-		}
-		
-	}
+//	public void flightsUpdate(HttpServletRequest request) throws Exception {
+//		
+//		int result = apisService.deleteAll();
+//		
+//		System.out.println("delete : "+result);
+//		result = 0;
+//		
+//		ApiItemDTO dto = new ApiItemDTO();
+//		dto.setAirportId((String)request.getParameter("airportId"));
+//		
+//		Days days = new Days();
+//		
+//		days.setSearchDay(request.getParameter("depPlandTime"));
+//		
+//		for(int i = 0; i < 7; i++) {
+//			
+//			Calendar ca = days.stringToCalendar(days.getB3Day().toString());
+//			ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
+//			
+//			Date d = new Date(ca.getTimeInMillis());
+//			String date = d.toString().replace("-", "");
+//			
+//			result = result + apisService.getFlightsList(dto, date);
+//			System.out.println("insert : "+result);
+//		}
+//		
+//	}
 
 }

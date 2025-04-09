@@ -4,14 +4,35 @@ public class FlightDTO {
 	
 	private String flightNum;
 	private String airlineNm;
+	private String airlineId;
 	private String vihicleId;
 	private String depAirportNm;
+	private String depAirportId;
 	private String arrAirportNm;
+	private String arrAirportId;
 	private String depPlandTime;
 	private String arrPlandTime;
 	private Long economyCharge;
 	private Long prestigeCharge;
 	
+	public String getAirlineId() {
+		return airlineId;
+	}
+	public void setAirlineId(String airlineId) {
+		this.airlineId = airlineId;
+	}
+	public String getDepAirportId() {
+		return depAirportId;
+	}
+	public void setDepAirportId(String depAirportId) {
+		this.depAirportId = depAirportId;
+	}
+	public String getArrAirportId() {
+		return arrAirportId;
+	}
+	public void setArrAirportId(String arrAirportId) {
+		this.arrAirportId = arrAirportId;
+	}
 	public String getFlightNum() {
 		return flightNum;
 	}
