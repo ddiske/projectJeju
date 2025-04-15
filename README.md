@@ -44,9 +44,9 @@ GitHub URL  : https://github.com/ddiske/projectJeju
 
 <br>
 
-## 4. ERD![projectJeju_erd](https://github.com/user-attachments/assets/bcb404ac-8a7d-4039-b795-6575adc55214)
+## 4. ERD
 
-![ERD]
+![ERD]![projectJeju_erd](https://github.com/user-attachments/assets/bcb404ac-8a7d-4039-b795-6575adc55214)
 
 <br>
 
