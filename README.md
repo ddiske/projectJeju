@@ -50,7 +50,7 @@ GitHub URL  : https://github.com/ddiske/projectJeju
 
 <br>
 
-## 5. 실행화면(기능 설명)
+<-- ## 5. 실행화면(기능 설명)
 
 |  |  |  |
 | :--------: | :--------: | :--------: |
@@ -67,4 +67,4 @@ GitHub URL  : https://github.com/ddiske/projectJeju
 ## 7. 참고 링크
 
 
-<br>
+<br> -->
